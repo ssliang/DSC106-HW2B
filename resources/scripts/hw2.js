@@ -87,7 +87,7 @@ function makeYAxis() {
 	
 	// combine widgetdata with dingusdata to find total units sold per day
 	let tmp1 = Object.values(store.totalQuantityPerDayD)
-	let tmp2 = Object.values(store.totalQuantityPerDayD)
+	let tmp2 = Object.values(store.totalQuantityPerDayW)
 	let array = [tmp1,tmp2];
 	// find the biggest y; this will let us scale y axis properly
 	result = array.reduce((r, a) => a.map((b, i) => (r[i] || 0) + b), []);
