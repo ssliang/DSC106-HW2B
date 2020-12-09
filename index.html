@@ -1,163 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat%7CPaytone+One&display=swap" rel="stylesheet" />
-    <title>Dingus & Widget</title>
-    <link rel="stylesheet" type="text/css" href="main.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Global Dashboard</title>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Paytone+One&display=swap" rel="stylesheet" />
+	<link href="../hw4/styles/dashboard.css" rel="stylesheet" />
+	<!--Stock Chart Imports-->
+	<script src="https://code.highcharts.com/stock/highstock.js"></script>
+	<script src="https://code.highcharts.com/stock/modules/export-data.js"></script>
+	<!--Map Imports-->
+	<script src="//code.highcharts.com/maps/modules/map.js"></script> 
+	<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+	<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/mapdata/custom/world-continents.js"></script>
+
+	<script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+	<script src="../hw4/scripts/main.js"></script>
 </head>
+
 <body>
-    <header>
-        <h1><img src="resources/images/dw-logo.png" alt="Dingus & Widget Logo" id="logo">Global Dashboard</h1>
-    </header>
-    <main>
-        <!--This is the top tracker portion of the webpage-->
-        <section>
-            <figure>
-                <table id="tracker">
-                    <thead>
-                    <tr id="trackerlabels">
-                        <th class="trackerheader">Dingus</th>
-                        <th class="trackerheader">Widget</th>
-                        <th class="trackerheader">Sales</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr id="trackervalues">
-                        <td class="trackerval" id="dingusval">0</td>
-                        <td class="trackerval" id="widgetval">0</td>
-                        <td class="trackerval" id="salesval"><span id="moneysign">$</span>0.00</td>
-                    </tr>
-                    </tbody>  
-                </table>
-            </figure>
-        </section>
-        <hr>
-        <!--This is the Data Viz portion of the webpage-->
-        <section class="data-viz">
-                <div>
-                    <figure>
-                        <figcaption>Sales Per Day</figcaption>
-                        <!--Stacked Bar-->
-                        <svg xmlns="http://www.w3.org/2000/svg" id="stackedbar" width="500" height="400" viewbox = '0 0 550 450'>
-                            <text class="viz-title" x="190" y="25">Dingus vs. Widget</text>
-                            <text class="viz-desc" x="130" y="50">Units of each product sold per date</text>
-                            <g transform="translate(0,90)">
-                                <g id="xAxis"><line id="x-axis" x1="70" y1="320" x2="500" y2="320"></line></g>
-                                <g id="yAxis"><line id="y-axis" x1="70" y1="0" x2="70" y2="320"></line></g>
-                                <g id='x-ticks'></g>
-                                <g id='y-ticks'></g>
-                                <g id="cols"></g>
-                            </g>  
-                            <g transform="translate(0,15)">
-                                <rect class='legend' x='453' y='10' rx='5' ry='5' height='55' width='100'></rect>
-                                <rect class='dingusIcon' x='460' y='15' height='15' width='15'></rect>
-                                <rect class='widgetIcon' x='460' y='40' height='15' width='15'></rect>
-                                <text class='legendLabel' x='485' y='30'>Dingus</text>
-                                <text class='legendLabel' x='485' y='55'>Widget</text>
-                            </g>            
-                        </svg>
-                   </figure>
-                </div>
-                <div>
-                    <figure>
-                            <figcaption>Total Sales Breakdown</figcaption>
-                            <!--Pie Chart-->
-                            <svg xmlns="http://www.w3.org/2000/svg" id="piechart" width="500" height="400" viewbox = '0 0 550 450'>
-                                <text class="viz-title" x="160" y="25">Total Dingus vs Widget Sold</text>
-                                <text class="viz-desc" x="150" y="50">Comparing proportion of product sold </text>
-                                <g id="pie" transform="translate(70,70)"> 
-                                    <circle r="150" cx="200" cy="200" fill="green" />
-                                </g>    
-                                <g transform="translate(0,90)">
-                                    <rect class='legend' x='413' y='20' rx='5' ry='5' height='55' width='150'></rect>
-                                    <rect class='dingusIcon' x='420' y='25' height='15' width='15'></rect>
-                                    <rect class='widgetIcon' x='420' y='50' height='15' width='15'></rect>
-                                    <text id='dingusPercent' x='445' y='40'>Dingus</text>
-                                    <text id='widgetPercent' x='445' y='65'>Widget</text>                            
-                                </g>
-                            </svg>
-                    </figure>
-                </div>
-                
-        </section>
-        <hr>
-        <!--This is the table portion of the webpage-->
-        <section>
-            <figure>
-                <table id="OHTable">
-                    <caption id="OHTitle"><h2>Order History</h2></caption>
-                    <colgroup>
-                        <col span="1" id="graycol">
-                        <col span="4">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th rowspan="2" class="OHHeader">ID#</th>
-                        <th rowspan="2" class="OHHeader">Date</th>
-                        <th colspan="2" class="OHHeader"> Quantity</th>
-                        <th rowspan="2" class="OHHeader">Total</th>
-                    </tr>
-                    <tr>
-                        <th class="OHHeader">Dingus</th>
-                        <th class="OHHeader">Widget</th>
-                    </tr>
-                    </thead>
-                    <tbody id="OHBody">
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="5" id="OHFoot">&#169; 2020 D&W Worldwide.</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </figure>
-        </section>
-        <!-- This section is for the order form portion of the webpage-->
-        <script type="text/javascript" src="resources/scripts/hw2.js"></script>
-        <section>
-            <details id="orderformdetails">
-                <summary><b>Order Form</b></summary>
-                <form class="pure-form">
-                    <hr>
-                    <fieldset>
-                        <label for="dingus"> Dingus </label>
-                        <input id="dingus" type="number" min="0" name="dingus" value=0 required oninput="validity.valid||(value='');" onkeyup="updateTotal(this.value, true)">
+	<h1><img src="../hw4/images/dw-logo.png" alt="Dingus & Widget" height="50" width="150" />Global Dashboard</h1>
 
-                        <label for="dunitprice">@</label>
-                        <input id="dunitprice" type="number" name="dingus unit price" value=14.25 disabled> 
+	<section>
+		<div id="myMap"></div>
+	</section>
 
-                        <label for="dtotal">= $</label>
-                        <input type="number" name="dingus total" id="dtotal" value=0.00 disabled> 
-                        
-                        <br /> 
-                        
-                        <label for="widget"> Widget </label>
-                        <input type="number" min="0" name="widget" id="widget" value=0 required oninput="validity.valid||(value='');" onkeyup="updateTotal(this.value, false)">
-                        
-                        <label for="wunitprice">@</label>
-                        <input type="number" name="widget unit price" id="wunitprice" value=9.99 disabled>  
-                        
-                        <label for="wtotal">= $</label>
-                        <input type="number" name="widget total" id="wtotal" value=0.00 disabled> 
-                        
-                        <br />
-                        
-                        <label for="total"> Total $</label>
-                        <input type="number" name="total" id="total" value=0.00 disabled>
-                        
-                        <br />
-                        
-                        <button type="button" class="button-error pure-button" onclick="clearForm();">Cancel</button>
-                        <button type="button" class="button-success pure-button" onclick="prepOrder();" disabled>Order</button>
+	<section id="vitalScorecards">
+		<section id="dingusScorecard">
+			<h3>Dingus</h3>
+			<output id="dingusSold"> </output>
+		</section>
 
-                    </fieldset>
-                </form>
-            </details>
-            
-        </section>
-    </main>
+		<section id="widgetScorecard">
+			<h3>Widget</h3>
+			<output id="widgetSold"> </output>
+		</section>
+
+		<section id="salesScorecard">
+			<h3>Sales</h3>
+			<output id="totalSales"> </output>
+		</section>
+	</section>
+
+	<hr />
+
+	<section id="summaryCharts" class="chart-parent--container">
+		<section id="salesPerMonthChart" class="chart--container"></section>
+		<section id="totalSalesChart" class="chart--container"></section>
+	</section>
+
+	<hr />
+
+	<section id="stockChart"></section>
+
 </body>
+
 </html>
